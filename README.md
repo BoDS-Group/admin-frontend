@@ -1,6 +1,6 @@
-# Store Frontend
+# System Admin Frontend
 
-This repository contains the frontend code for the Store application. The application is built using Next.js and React, and it includes various components and pages to manage products, categories, orders, and settings.
+This repository contains the frontend code for the System Admin application. The application is built using Next.js and React, and it includes various components and pages to add a new store with the store admin.
 
 ## Table of Contents
 
@@ -17,8 +17,8 @@ This repository contains the frontend code for the Store application. The applic
 To get started with the project, clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/yourusername/store-frontend.git
-cd store-frontend
+git clone https://github.com/BoDS-Group/admin-frontend.git
+cd admin-frontend
 npm install --legacy-peer-deps
 ```
 ### [IMPORTANT!] .env file setup
@@ -52,7 +52,7 @@ To start the production server, use:
 npm start
 ```
 
-## Project Structure
+## Project Structure (Not Updated)
 
 The project structure is as follows:
 
@@ -84,7 +84,7 @@ store-frontend/
 └── README.md
 ```
 
-## Components
+## Components (Not Updated)
 
 ### Nav.js
 
