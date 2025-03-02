@@ -1,5 +1,14 @@
 import axiosInstance from "@/components/AxiosInstance";
 
+export async function fetchStores() {
+  try {
+    const response = await axiosInstance.get('/admin/stores');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching stores:', error);
+  }
+}
+
 // Fetch all products
 export async function fetchProducts() {
   try {

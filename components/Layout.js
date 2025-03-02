@@ -95,7 +95,7 @@ export default function Layout({ children }) {
         <Nav show={showNav} />
         <div className="flex-grow p-4 mt-10">
           <div className="flex w-fit absolute md:top-4 right-4 bg-highlight gap-1 text-primary font-medium rounded-lg overflow-hidden">
-            <img src={user?.picture} alt="" className="w-10 h-10" />
+            {user?.picture && <img src={user?.picture} alt="" className="w-10 h-10" />}
             <span className="px-2 my-auto">{user?.name}</span>
             <button onClick={() => {
               localStorage.removeItem("token");
