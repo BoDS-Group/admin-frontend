@@ -1,16 +1,15 @@
 # System Admin Frontend
 
-This repository contains the frontend code for the System Admin application. The application is built using Next.js and React, and it includes various components and pages to add a new store with the store admin.
+This repository contains the frontend code for the System Admin application. The application is built using Next.js and React, and it includes various components and pages to manage stores, products, and orders.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Components](#components)
-- [Pages](#pages)
-- [Contributing](#contributing)
-- [License](#license)
+- Installation
+- Usage
+- Project Structure
+- Components
+- Pages
+- API Integration
 
 ## Installation
 
@@ -21,13 +20,9 @@ git clone https://github.com/BoDS-Group/admin-frontend.git
 cd admin-frontend
 npm install --legacy-peer-deps
 ```
-### [IMPORTANT!] .env file setup
-Use the `.env copy` file in your project. You need to rename it to `.env` and ensure that the environment variables are correctly set. 
 
-### [IMPORTANT!] obtaining GOOGLE_ID and GOOGLE_SECRET
-1. Go to the [Google API Console](https://console.cloud.google.com/apis/credentials) and create a new project.
-2. Enable the Google API for OAuth 2.0, create a new client and set the client ID and client secret in the `.env` file.
-3. Put ``http://localhost:3000/api/auth/google/callback`` or ``PRODUCTION_DOMAIN/api/auth/google/callback`` as the callback URL in the Authorized redirect URIs section of the client.
+### [IMPORTANT!] .env file setup
+Use the `.env copy` file in your project. You need to rename it to `.env` and ensure that the environment variables are correctly set.
 
 ## Usage
 
@@ -52,67 +47,135 @@ To start the production server, use:
 npm start
 ```
 
-## Project Structure (Not Updated)
+## Project Structure
 
 The project structure is as follows:
 
 ```
-store-frontend/
+admin-frontend/
 ├── components/
+│   ├── AxiosInstance.js
+│   ├── Layout.js
+│   ├── LoginForm.js
+│   ├── Logo.js
 │   ├── Nav.js
-│   ├── Header.js
-│   └── Footer.js
+│   ├── ProductForm.js
+│   ├── Spinner.js
+│   ├── StoreForm.js
+│   └── UserContext.js
 ├── pages/
-│   ├── index.js
+│   ├── api/
+│   │   ├── auth/
+│   │   │   ├── google.js
+│   │   │   └── google/callback.js
 │   ├── products/
-│   │   ├── index.js
-│   │   ├── new.js
-│   │   └── edit/[id].js
-│   ├── categories.js
+│   │   ├── delete/[...id].js
+│   │   ├── edit/[...id].js
+│   │   └── new.js
+│   ├── stores/
+│   │   ├── delete/[...id].js
+│   ├── add-store.js
+│   ├── index.js
 │   ├── orders.js
-│   └── settings.js
+│   └── _app.js
+│   └── _document.js
 ├── public/
-│   ├── images/
-│   └── styles/
 ├── styles/
 │   ├── globals.css
 │   └── Home.module.css
-├── .next/
-├── .history/
+├── utils/
+│   └── api.js
+├── .env copy
+├── .eslintrc.json
+├── .gitignore
+├── jsconfig.json
+├── next.config.js
 ├── package.json
-├── package-lock.json
+├── postcss.config.js
+├── tailwind.config.js
 └── README.md
 ```
 
-## Components (Not Updated)
+## Components
 
-### Nav.js
+#### AxiosInstance.js
+This component sets up an Axios instance with a base URL and default headers. It also includes an interceptor to add the authorization token to each request.
 
-The `Nav` component is responsible for rendering the navigation bar. It includes links to various pages such as orders and settings.
+#### Layout.js
+This component provides the layout for the application, including the navigation bar and user authentication handling.
+
+#### LoginForm.js
+This component renders the login form and handles user authentication.
+
+#### Logo.js
+This component renders the application logo.
+
+#### Nav.js
+This component renders the navigation bar with links to various pages.
+
+#### ProductForm.js
+This component renders the form for adding and editing products.
+
+#### Spinner.js
+This component renders a loading spinner.
+
+#### StoreForm.js
+This component renders the form for adding a new store.
+
+#### UserContext.js
+This component provides a context for managing user state across the application.
 
 ## Pages
 
-### index.js
+#### index.js
+The main landing page of the application. It displays a welcome message to the logged-in user.
 
-The main landing page of the application.
+#### add-store.js
+This page renders the form for adding a new store.
 
-### products.js
+#### orders.js
+This page displays a list of orders.
 
-- `index.js`: Displays a list of products.
+#### products/new.js
+Form to add a new product.
 
-### products/
+#### products/edit/[...id].js
+Form to edit an existing product.
 
-- `new.js`: Form to add a new product.
-- `edit/[id].js`: Form to edit an existing product.
+#### products/delete/[...id].js
+Page to confirm the deletion of a product.
 
-### categories.js
+#### stores/delete/[...id].js
+Page to confirm the deletion of a store.
 
-Displays a list of categories.
+#### api/auth/google.js
+API route to initiate Google OAuth authentication. (Currently not in use)
 
-### orders.js
+#### api/auth/google/callback.js
+API route to handle the callback from Google OAuth authentication. (Currently not in use)
 
-Displays a list of orders.
+#### _app.js
+This file customizes the default App component to include the UserProvider for managing user state.
 
-### settings.js
+#### _document.js
+This file customizes the default Document component to include additional HTML and body tags.
 
-Displays the settings page.
+## API Integration
+
+### Fetching Data
+The application uses Axios to fetch data from the backend API. The `AxiosInstance.js` component sets up the Axios instance with a base URL and default headers.
+
+### API Functions
+The `utils/api.js` file contains functions for making API requests:
+
+- `fetchStores()`: Fetches all stores.
+- `fetchStoreById(id)`: Fetches a store by its ID.
+- `deleteStoreById(id)`: Deletes a store by its ID.
+- `fetchProducts()`: Fetches all products.
+- `fetchProductById(id)`: Fetches a product by its ID.
+- `deleteProductById(id)`: Deletes a product by its ID.
+- `fetchCategories()`: Fetches all categories.
+- `updateCategoryById(id, data)`: Updates a category by its ID.
+- `deleteCategoryById(id)`: Deletes a category by its ID.
+- `insertCategory(data)`: Inserts a new category.
+- `fetchCities()`: Fetches all cities.
