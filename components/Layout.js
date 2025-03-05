@@ -101,6 +101,7 @@ export default function Layout({ children }) {
               localStorage.removeItem("token");
               setToken(null);
               setUser(null);
+              window.location.reload();
             }} className="bg-white p-2 px-4 rounded-lg">
               Logout
             </button>
