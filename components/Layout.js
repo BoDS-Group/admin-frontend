@@ -16,7 +16,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    console.log(storedToken);
+    // console.log(storedToken);
     if (storedToken) {
       setToken(storedToken);
       fetchUser(storedToken);

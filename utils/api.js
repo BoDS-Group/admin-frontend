@@ -9,6 +9,24 @@ export async function fetchStores() {
   }
 }
 
+export async function fetchStoreById(id) {
+  try {
+    const response = await axiosInstance.get(`/admin/store/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching store by id:', error);
+  }
+}
+
+export async function deleteStoreById(id) {
+  try {
+    const response = await axiosInstance.delete(`/admin/store/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting store:', error);
+  }
+}
+
 // Fetch all products
 export async function fetchProducts() {
   try {
